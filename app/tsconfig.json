@@ -15,7 +15,9 @@
     "baseUrl": ".",
     "types": [
       "webpack-env",
-      "jest"
+      "jest",
+      "@types/jest",
+      "@testing-library/jest-dom"
     ],
     "paths": {
       "@/*": [
@@ -23,6 +25,15 @@
       ],
       "@atoms/*": [
         "src/components/atoms/*"
+      ],
+      "@molecules/*": [
+        "src/components/molecules/*"
+      ],
+      "@organisms/*": [
+        "src/components/organisms/*"
+      ],
+      "@templates/*": [
+        "src/components/templates/*"
       ]
     },
     "lib": [
