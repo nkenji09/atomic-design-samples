@@ -1,5 +1,7 @@
 FROM node:17-alpine
 
+WORKDIR /home/root
+
 RUN apk update && \
     apk add git
 
