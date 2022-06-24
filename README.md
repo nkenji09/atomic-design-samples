@@ -1,3 +1,11 @@
+# 環境設定
+
+## Volar の 「Take Over Mode」を有効にする
+
+1. 拡張機能 で下記を検索
+  @builtin typescript
+2. 無効にする(workspace)
+
 # ツール選定
 
 ## Vue CLI

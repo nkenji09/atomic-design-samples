@@ -10,4 +10,6 @@ RUN yarn init -y
 RUN yarn global add @vue/cli
 RUN vue upgrade --next
 
+EXPOSE 3000
+
 WORKDIR /home/app
