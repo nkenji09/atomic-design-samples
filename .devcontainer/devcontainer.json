@@ -1,0 +1,45 @@
+{
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "app",
+  "workspaceFolder": "/home/app",
+  "settings": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "eslint.format.enable": false,
+    "eslint.validate": ["javascript", "javascriptreact", "vue"],
+    "eslint.workingDirectories": ["./src"],
+    "eslint.packageManager": "yarn",
+    "files.associations": {
+      "*.vue": "vue"
+    },
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true,
+      "source.fixAll.eslint": true
+    },
+    "scss.validate": false,
+    "css.validate": false,
+    "stylelint.configFile": "./src/.stylelintrc",
+    "stylelint.validate": ["vue", "css"],
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "tailwindCSS.validate": true,
+    "tailwindCSS.emmetCompletions": true,
+    "prettier.configPath": "./src/.prettierrc.yml",
+    "prettier.ignorePath": "./src.prettierignore",
+    "npm.packageManager": "yarn"
+  },
+  "extensions": [
+    "Vue.volar",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "stylelint.vscode-stylelint",
+    "dbaeumer.vscode-eslint",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "ms-ceintl.vscode-language-pack-ja",
+    "gruntfuggly.todo-tree",
+    "github.vscode-pull-request-github"
+  ],
+  "postCreateCommand": "cd src; yarn"
+}
