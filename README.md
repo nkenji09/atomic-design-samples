@@ -3,6 +3,7 @@
 ## Vue CLI
 
 - vue3 インストール用
+- インストール
 
 ```
 #vue create app
@@ -17,6 +18,12 @@ Vue CLI v5.0.6
 ? Pick additional lint features: Lint on save, Lint and fix on commit
 ? Pick a unit testing solution: Jest
 ? Where do you prefer placing config for Babel, ESLint, etc.? In dedicated config files
+```
+
+- pathsの解決
+
+```
+vue add ts-path
 ```
 
 
