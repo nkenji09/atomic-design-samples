@@ -8,7 +8,7 @@
     "editor.formatOnSave": true,
     "eslint.format.enable": false,
     "eslint.validate": ["javascript", "javascriptreact", "vue"],
-    "eslint.workingDirectories": ["./src"],
+    "eslint.workingDirectories": ["./app"],
     "eslint.packageManager": "yarn",
     "files.associations": {
       "*.vue": "vue"
@@ -19,15 +19,15 @@
     },
     "scss.validate": false,
     "css.validate": false,
-    "stylelint.configFile": "./src/.stylelintrc",
+    "stylelint.configFile": "./app/.stylelintrc",
     "stylelint.validate": ["vue", "css"],
     "editor.quickSuggestions": {
       "strings": true
     },
     "tailwindCSS.validate": true,
     "tailwindCSS.emmetCompletions": true,
-    "prettier.configPath": "./src/.prettierrc.yml",
-    "prettier.ignorePath": "./src.prettierignore",
+    "prettier.configPath": "./app/.prettierrc.yml",
+    "prettier.ignorePath": "./app.prettierignore",
     "npm.packageManager": "yarn"
   },
   "extensions": [
@@ -41,5 +41,5 @@
     "gruntfuggly.todo-tree",
     "github.vscode-pull-request-github"
   ],
-  "postCreateCommand": "cd src; yarn"
+  "postCreateCommand": "cd app; yarn"
 }
