@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { defineEmits } from "vue";
 
+/* ■ Emits ■ */
 const emits = defineEmits<{
   (e: "click"): void;
 }>();

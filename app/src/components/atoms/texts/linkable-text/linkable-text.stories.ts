@@ -2,15 +2,15 @@ import { expect } from "@storybook/jest";
 import { within, fireEvent } from "@storybook/testing-library";
 import type { Story, Meta } from "@storybook/vue3";
 import { action } from "@storybook/addon-actions";
-import TestComponent from "@atoms/buttons/normal-button/normal-button.vue";
+import TestComponent from "@atoms/texts/linkable-text/linkable-text.vue";
 
 const markdown = `
-基本的なボタン  
+任意でリンク可能なテキスト  
 `;
 
 // コンポーネントのメタデータを記述
 export default {
-  title: "Atoms/buttons/normal-button",
+  title: "Atoms/texts/linkable-text",
   component: TestComponent,
   parameters: {
     layout: "centered",
@@ -58,7 +58,9 @@ const Template: Story = (args, { argTypes }) => {
 };
 
 export const Basic = Template.bind({});
-Basic.args = {};
+Basic.args = {
+  url: "https://google.com",
+};
 Basic.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   const cmp = await canvas.getByText("SLOTS DUMMY");
