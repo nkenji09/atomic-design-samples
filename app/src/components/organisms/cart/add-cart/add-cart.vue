@@ -7,7 +7,7 @@ import { AddCartLogicInterface } from "./add-cart.logic";
 
 /* ■ Props ■ */
 type Props = {
-  product: Product;
+  product: Product.AsObject;
   logic: AddCartLogicInterface;
 };
 const props = withDefaults(defineProps<Props>(), {});
@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<Props>(), {});
 const addCount = ref<number>(1);
 const disabled = computed(() => (addCount?.value || 0) <= 0);
 const onClick = () => {
-  props.logic.addCart(props.product, addCount.value);
+  props.logic.addCart(props.product.id, addCount.value);
 };
 </script>
 

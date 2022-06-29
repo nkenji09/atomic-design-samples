@@ -8,7 +8,7 @@ import BaseText from "@/components/atoms/texts/base-text/base-text.vue";
 
 /* ■ Props ■ */
 type Props = {
-  product: Product;
+  product: Product.AsObject;
 };
 const props = withDefaults(defineProps<Props>(), {});
 

@@ -51,8 +51,8 @@ const Template: Story = (args, { argTypes }) => {
 };
 
 class TestLogic extends Logic {
-  async addCart(product: Product, quantity: number): Promise<AddCartResponse> {
-    const result = await super.addCart(product, quantity);
+  async addCart(productId: string, quantity: number): Promise<AddCartResponse> {
+    const result = await super.addCart(productId, quantity);
     // TEST: addCartの成功可否
     await expect(result.isSuccess).toBe(true);
     return result;
