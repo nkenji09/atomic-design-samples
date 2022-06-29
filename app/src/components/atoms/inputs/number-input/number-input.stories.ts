@@ -34,7 +34,7 @@ const Template: Story = (args, { argTypes }) => {
    * ( Actions にログを表示できる )
    */
   const actionsData = {
-    onClick: action("click"),
+    onInput: action("input"),
   };
 
   return {
@@ -46,11 +46,11 @@ const Template: Story = (args, { argTypes }) => {
     },
     template: `
       <TestComponent 
-        @click="onClick"
+        @input="onInput"
         v-bind="args"
       >SLOTS DUMMY</TestComponent>`,
     methods: {
-      onClick: () => {
+      onInput: () => {
         ++emitCounter;
       },
     },
@@ -61,10 +61,10 @@ export const Basic = Template.bind({});
 Basic.args = {};
 Basic.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const cmp = await canvas.getByText("SLOTS DUMMY");
+  const cmp = await canvas.getByRole("input");
   await expect(cmp).toBeInTheDocument();
 
   // TEST: カウントアップされて 1 になるはず
-  await fireEvent.click(cmp);
+  await fireEvent.input(cmp, "5");
   await expect(emitCounter).toBe(1);
 };

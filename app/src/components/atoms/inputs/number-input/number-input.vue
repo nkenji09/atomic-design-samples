@@ -1,22 +1,32 @@
 <script lang="ts" setup>
-import { defineEmits } from "vue";
+import { defineEmits, withDefaults, defineProps, ref } from "vue";
 
 /* ■ Props ■ */
-// type Props = {};
-// const props = withDefaults(defineProps<Props>(), {});
+type Props = {
+  placeholder?: string;
+};
+const props = withDefaults(defineProps<Props>(), {
+  placeholder: "",
+});
 
 /* ■ Emits ■ */
 const emits = defineEmits<{
-  (e: "click"): void;
+  (e: "input", value: number): void;
 }>();
-const onClick = () => {
-  emits("click");
+const onInput = () => {
+  emits("input", value.value);
 };
+
+/* ■ Logic ■ */
+const value = ref<number>(0);
 </script>
 
 <template>
-  <a @click="onClick" href="javascript:void(0)">
-    <!-- slots: default -->
-    <slot>BASE TEXT</slot>
-  </a>
+  <input
+    v-model="value"
+    role="input"
+    type="number"
+    @input="onInput"
+    :placeholder="props.placeholder"
+  />
 </template>
