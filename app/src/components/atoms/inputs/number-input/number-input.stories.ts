@@ -1,3 +1,4 @@
+import { ref } from "vue";
 import { expect } from "@storybook/jest";
 import { within, fireEvent } from "@storybook/testing-library";
 import type { Story, Meta } from "@storybook/vue3";
@@ -27,15 +28,13 @@ export default {
   },
 } as Meta;
 
-let emitCounter: number;
+let emitCounter = 0;
 const Template: Story = (args, { argTypes }) => {
   /**
    * Eventは onXxxx として指定する
    * ( Actions にログを表示できる )
    */
-  const actionsData = {
-    onInput: action("input"),
-  };
+  const actionsData = {};
 
   return {
     props: Object.keys(argTypes),
@@ -45,12 +44,14 @@ const Template: Story = (args, { argTypes }) => {
       return { args: { ...args, ...actionsData } };
     },
     template: `
+      {{ emitCounter }}
       <TestComponent 
-        @input="onInput"
+        v-model="emitCounter"
+        @update:modelValue="onUpdate"
         v-bind="args"
       >SLOTS DUMMY</TestComponent>`,
     methods: {
-      onInput: () => {
+      onUpdate: () => {
         ++emitCounter;
       },
     },
@@ -61,7 +62,7 @@ export const Basic = Template.bind({});
 Basic.args = {};
 Basic.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const cmp = await canvas.getByRole("input");
+  const cmp = await canvas.getByRole("number");
   await expect(cmp).toBeInTheDocument();
 
   // TEST: カウントアップされて 1 になるはず
