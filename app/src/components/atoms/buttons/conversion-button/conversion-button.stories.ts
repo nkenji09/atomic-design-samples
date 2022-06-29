@@ -5,7 +5,7 @@ import { action } from "@storybook/addon-actions";
 import TestComponent from "@atoms/buttons/conversion-button/conversion-button.vue";
 
 const markdown = `
-基本的なボタン  
+コンバージョン計測対象の見た目をもつボタン  
 `;
 
 // コンポーネントのメタデータを記述
