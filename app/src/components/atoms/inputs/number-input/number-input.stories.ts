@@ -10,7 +10,7 @@ const markdown = `
 
 // コンポーネントのメタデータを記述
 export default {
-  title: "Atoms/images/number-input",
+  title: "Atoms/inputs/number-input",
   component: TestComponent,
   parameters: {
     layout: "centered",
