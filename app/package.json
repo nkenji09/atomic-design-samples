@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "jest --watch",
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "rm": "rimraf ./node_modules/@types/react",
+    "dev": "yarn rm; jest --watch",
+    "serve": "yarn rm; vue-cli-service serve",
+    "build": "yarn rm; vue-cli-service build",
+    "test:unit": "yarn rm; vue-cli-service test:unit",
+    "lint": "yarn rm; vue-cli-service lint",
+    "storybook": "yarn rm; start-storybook -p 6006",
+    "build-storybook": "yarn rm; build-storybook"
   },
   "dependencies": {
     "vue": "^3.2.13"
@@ -48,6 +49,7 @@
     "jest": "^27.0.5",
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1",
+    "rimraf": "^3.0.2",
     "ts-jest": "^27.0.4",
     "typescript": "~4.5.5",
     "vue-cli-plugin-ts-paths": "~0.0.4",
