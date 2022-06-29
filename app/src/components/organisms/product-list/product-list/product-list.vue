@@ -1,27 +1,26 @@
 <script lang="ts" setup>
-import { defineEmits, defineProps, withDefaults } from "vue";
+import { defineProps, withDefaults } from "vue";
+import { ProductListLogicInterface } from "./product-list.logic";
+import ProductListItem from "../product-list-item/product-list-item.vue";
 
 /* ■ Props ■ */
 type Props = {
-  url: string;
+  logic: ProductListLogicInterface;
 };
-const props = withDefaults(defineProps<Props>(), {
-  url: "",
-});
+const props = withDefaults(defineProps<Props>(), {});
 
-/* ■ Emits ■ */
-const emits = defineEmits<{
-  (e: "click", url: string): void;
-}>();
-const onClick = () => {
-  if (!props.url) return;
-  emits("click", props.url);
-};
+/* ■ Logic ■ */
+const products = props.logic.getProductsState();
+props.logic.loadProducts();
 </script>
 
 <template>
-  <a @click="onClick" href="javascript:void(0)">
-    <!-- slots: default -->
-    <slot>LINKABLE TEXT</slot>
-  </a>
+  <div role="itemlist">
+    <ul v-if="products.length > 0">
+      <li v-for="product in products" :key="product.id">
+        <ProductListItem :product="product"></ProductListItem>
+      </li>
+    </ul>
+    <p v-else>loading...</p>
+  </div>
 </template>

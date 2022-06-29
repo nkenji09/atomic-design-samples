@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<Props>(), {});
 
 <template>
   <article role="listitem">
-    <ListImage path="assets/logo.png" />
+    <ListImage :path="props.product.image" />
     <div class="product-info">
       <p>{{ props.product.name }}</p>
       <AddCart
