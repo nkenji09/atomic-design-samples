@@ -1,11 +1,16 @@
 import { expect } from "@storybook/jest";
-import { within, fireEvent } from "@storybook/testing-library";
+import { within } from "@storybook/testing-library";
 import type { Story, Meta } from "@storybook/vue3";
-import { action } from "@storybook/addon-actions";
 import TestComponent from "./list-image.vue";
 
 const markdown = `
 商品一覧の画像  
+
+## 使用方法
+
+@/以降のパスを指定します
+
+    <ListImage path="assets/logo.png" alt="説明" />
 `;
 
 // コンポーネントのメタデータを記述
@@ -27,44 +32,34 @@ export default {
   },
 } as Meta;
 
-let emitCounter: number;
 const Template: Story = (args, { argTypes }) => {
   /**
    * Eventは onXxxx として指定する
    * ( Actions にログを表示できる )
    */
-  const actionsData = {
-    onClick: action("click"),
-  };
+  const actionsData = {};
 
   return {
     props: Object.keys(argTypes),
     components: { TestComponent },
     setup: () => {
-      emitCounter = 0;
       return { args: { ...args, ...actionsData } };
     },
     template: `
       <TestComponent 
-        @click="onClick"
         v-bind="args"
       >SLOTS DUMMY</TestComponent>`,
-    methods: {
-      onClick: () => {
-        ++emitCounter;
-      },
-    },
+    methods: {},
   };
 };
 
 export const Basic = Template.bind({});
-Basic.args = {};
+Basic.args = {
+  path: "assets/logo.png",
+  alt: "list-image",
+};
 Basic.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const cmp = await canvas.getByText("SLOTS DUMMY");
+  const cmp = await canvas.getByAltText("list-image");
   await expect(cmp).toBeInTheDocument();
-
-  // TEST: カウントアップされて 1 になるはず
-  await fireEvent.click(cmp);
-  await expect(emitCounter).toBe(1);
 };

@@ -1,22 +1,16 @@
 <script lang="ts" setup>
-import { defineEmits } from "vue";
+import { withDefaults, defineProps } from "vue";
 
 /* ■ Props ■ */
-// type Props = {};
-// const props = withDefaults(defineProps<Props>(), {});
-
-/* ■ Emits ■ */
-const emits = defineEmits<{
-  (e: "click"): void;
-}>();
-const onClick = () => {
-  emits("click");
+type Props = {
+  path: string;
+  alt: string;
 };
+const props = withDefaults(defineProps<Props>(), {
+  alt: "",
+});
 </script>
 
 <template>
-  <a @click="onClick" href="javascript:void(0)">
-    <!-- slots: default -->
-    <slot>BASE TEXT</slot>
-  </a>
+  <img :src="require(`@/${props.path}`)" :alt="props.alt" />
 </template>

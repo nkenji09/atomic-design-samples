@@ -7,9 +7,6 @@ type Props = {
 };
 const props = withDefaults(defineProps<Props>(), {});
 
-/* ■ Emits ■ */
-// const emits = defineEmits<{}>();
-
 /* ■ Methods ■ */
 const convertPriceText = (price: number) => {
   return price.toLocaleString("ja-JP", { style: "currency", currency: "JPY" });

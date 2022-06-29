@@ -26,7 +26,6 @@ export default {
   },
 } as Meta;
 
-// let emitCounter: number;
 const Template: Story = (args, { argTypes }) => {
   /**
    * Eventは onXxxx として指定する
@@ -38,7 +37,6 @@ const Template: Story = (args, { argTypes }) => {
     props: Object.keys(argTypes),
     components: { TestComponent },
     setup: () => {
-      // emitCounter = 0;
       return { args: { ...args, ...actionsData } };
     },
     template: `

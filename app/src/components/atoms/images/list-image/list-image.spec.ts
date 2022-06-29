@@ -7,7 +7,7 @@ const { Basic } = composeStories(Stories);
 const instance = (Basic as CallableFunction)();
 
 describe(`${name} storybook`, () => {
-  test("クリックするとemitが実行される", async () => {
+  test("画像が指定したAltが設定された状態で読み込まれる", async () => {
     const { container } = render(instance);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     await Stories.Basic.play?.({ canvasElement: container } as any);
