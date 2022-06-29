@@ -1,11 +1,13 @@
 import { expect } from "@storybook/jest";
 import { within, fireEvent } from "@storybook/testing-library";
 import type { Story, Meta } from "@storybook/vue3";
-import { action } from "@storybook/addon-actions";
 import TestComponent from "./add-cart.vue";
+import { AddCartResponse } from "./add-cart.logic";
+import Logic from "./logics/on-product-list";
+import { Product } from "@/values/product";
 
 const markdown = `
-任意でリンク可能なテキスト  
+任意の数量をカートに追加するボタン  
 `;
 
 // コンポーネントのメタデータを記述
@@ -27,46 +29,44 @@ export default {
   },
 } as Meta;
 
-let emitCounter: number;
 const Template: Story = (args, { argTypes }) => {
   /**
    * Eventは onXxxx として指定する
    * ( Actions にログを表示できる )
    */
-  const actionsData = {
-    onClick: action("click"),
-  };
+  const actionsData = {};
 
   return {
     props: Object.keys(argTypes),
     components: { TestComponent },
     setup: () => {
-      emitCounter = 0;
       return { args: { ...args, ...actionsData } };
     },
     template: `
       <TestComponent 
-        @click="onClick"
         v-bind="args"
       >SLOTS DUMMY</TestComponent>`,
-    methods: {
-      onClick: () => {
-        ++emitCounter;
-      },
-    },
+    methods: {},
   };
 };
 
+class TestLogic extends Logic {
+  async addCart(product: Product, quantity: number): Promise<AddCartResponse> {
+    const result = await super.addCart(product, quantity);
+    // TEST: addCartの成功可否
+    await expect(result.isSuccess).toBe(true);
+    return result;
+  }
+}
+
 export const Basic = Template.bind({});
 Basic.args = {
-  url: "https://google.com",
+  product: new Product({ id: "1", name: "dummy", price: 1000 }),
+  logic: new TestLogic(),
 };
 Basic.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const cmp = await canvas.getByText("SLOTS DUMMY");
+  const cmp = await canvas.getByRole("button");
   await expect(cmp).toBeInTheDocument();
-
-  // TEST: カウントアップされて 1 になるはず
   await fireEvent.click(cmp);
-  await expect(emitCounter).toBe(1);
 };

@@ -44,9 +44,7 @@ const Template: Story = (args, { argTypes }) => {
       return { args: { ...args, ...actionsData } };
     },
     template: `
-      {{ emitCounter }}
       <TestComponent 
-        v-model="emitCounter"
         @update:modelValue="onUpdate"
         v-bind="args"
       >SLOTS DUMMY</TestComponent>`,
@@ -59,10 +57,12 @@ const Template: Story = (args, { argTypes }) => {
 };
 
 export const Basic = Template.bind({});
-Basic.args = {};
+Basic.args = {
+  placeholder: "test",
+};
 Basic.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const cmp = await canvas.getByRole("number");
+  const cmp = await canvas.getByPlaceholderText("test");
   await expect(cmp).toBeInTheDocument();
 
   // TEST: カウントアップされて 1 になるはず

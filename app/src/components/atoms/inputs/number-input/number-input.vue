@@ -6,10 +6,14 @@ import { defineEmits, withDefaults, defineProps } from "vue";
 type Props = {
   modelValue: number;
   placeholder?: string;
+  min?: number;
+  max?: number;
 };
 const props = withDefaults(defineProps<Props>(), {
   modelValue: 0,
   placeholder: "",
+  min: 1,
+  max: 9999,
 });
 
 /* ■ Emits ■ */
@@ -21,7 +25,6 @@ const emits = defineEmits<{
 const value = computed({
   get: () => props.modelValue,
   set: (inputValue) => {
-    console.log("UPD!!!", inputValue);
     emits("update:modelValue", inputValue);
   },
 });
@@ -32,6 +35,8 @@ const value = computed({
     v-model="value"
     role="number"
     type="number"
+    :min="props.min"
+    :max="props.max"
     :placeholder="props.placeholder"
   />
 </template>

@@ -1,27 +1,30 @@
 <script lang="ts" setup>
-import { defineEmits, defineProps, withDefaults } from "vue";
+import { defineProps, withDefaults, ref, computed } from "vue";
+import { Product } from "@/values/product";
+import ConversionButton from "@/components/atoms/buttons/conversion-button/conversion-button.vue";
+import NumberInput from "@/components/atoms/inputs/number-input/number-input.vue";
+import { AddCartLogicInterface } from "./add-cart.logic";
 
 /* ■ Props ■ */
 type Props = {
-  url: string;
+  product: Product;
+  logic: AddCartLogicInterface;
 };
-const props = withDefaults(defineProps<Props>(), {
-  url: "",
-});
+const props = withDefaults(defineProps<Props>(), {});
 
-/* ■ Emits ■ */
-const emits = defineEmits<{
-  (e: "click", url: string): void;
-}>();
+/* ■ Logic ■ */
+const addCount = ref<number>(1);
+const disabled = computed(() => (addCount?.value || 0) <= 0);
 const onClick = () => {
-  if (!props.url) return;
-  emits("click", props.url);
+  props.logic.addCart(props.product, addCount.value);
 };
 </script>
 
 <template>
-  <a @click="onClick" href="javascript:void(0)">
-    <!-- slots: default -->
-    <slot>LINKABLE TEXT</slot>
-  </a>
+  <section>
+    <NumberInput v-model="addCount"></NumberInput>
+    <ConversionButton @click="onClick" :disabled="disabled"
+      >カートに入れる</ConversionButton
+    >
+  </section>
 </template>

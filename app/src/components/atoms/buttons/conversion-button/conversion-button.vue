@@ -1,5 +1,13 @@
 <script lang="ts" setup>
-import { defineEmits } from "vue";
+import { defineEmits, withDefaults, defineProps } from "vue";
+
+/* ■ Props ■ */
+type Props = {
+  disabled?: boolean;
+};
+const props = withDefaults(defineProps<Props>(), {
+  disabled: false,
+});
 
 /* ■ Emits ■ */
 const emits = defineEmits<{
@@ -12,7 +20,7 @@ const onClick = () => {
 </script>
 
 <template>
-  <button @click="onClick">
+  <button @click="onClick" :disabled="props.disabled" role="button">
     <slot>CLICK ME</slot>
   </button>
 </template>
