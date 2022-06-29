@@ -1,27 +1,29 @@
 <script lang="ts" setup>
-import { defineEmits, defineProps, withDefaults } from "vue";
+import { defineProps, withDefaults } from "vue";
+import { Product } from "@/values/product";
+import ListImage from "@/components/atoms/images/list-image/list-image.vue";
+import AddCart from "@organisms/cart/add-cart/add-cart.vue";
+import OnProductListAddCartLogic from "@organisms/cart/add-cart/logics/on-product-list";
 
 /* ■ Props ■ */
 type Props = {
-  url: string;
+  product: Product;
 };
-const props = withDefaults(defineProps<Props>(), {
-  url: "",
-});
+const props = withDefaults(defineProps<Props>(), {});
 
 /* ■ Emits ■ */
-const emits = defineEmits<{
-  (e: "click", url: string): void;
-}>();
-const onClick = () => {
-  if (!props.url) return;
-  emits("click", props.url);
-};
+// 本来はここでページ遷移させてもいいけどサンプルなので実装しない
 </script>
 
 <template>
-  <a @click="onClick" href="javascript:void(0)">
-    <!-- slots: default -->
-    <slot>LINKABLE TEXT</slot>
-  </a>
+  <article role="listitem">
+    <ListImage path="assets/logo.png" />
+    <div class="product-info">
+      <p>{{ props.product.name }}</p>
+      <AddCart
+        :product="props.product"
+        :logic="new OnProductListAddCartLogic()"
+      />
+    </div>
+  </article>
 </template>

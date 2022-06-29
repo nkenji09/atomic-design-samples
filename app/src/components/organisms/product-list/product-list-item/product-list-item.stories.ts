@@ -1,8 +1,8 @@
 import { expect } from "@storybook/jest";
-import { within, fireEvent } from "@storybook/testing-library";
+import { within } from "@storybook/testing-library";
 import type { Story, Meta } from "@storybook/vue3";
-import { action } from "@storybook/addon-actions";
 import TestComponent from "./product-list-item.vue";
+import { Product } from "@/values/product";
 
 const markdown = `
 商品一覧の1つのアイテム  
@@ -27,46 +27,33 @@ export default {
   },
 } as Meta;
 
-let emitCounter: number;
 const Template: Story = (args, { argTypes }) => {
   /**
    * Eventは onXxxx として指定する
    * ( Actions にログを表示できる )
    */
-  const actionsData = {
-    onClick: action("click"),
-  };
+  const actionsData = {};
 
   return {
     props: Object.keys(argTypes),
     components: { TestComponent },
     setup: () => {
-      emitCounter = 0;
       return { args: { ...args, ...actionsData } };
     },
     template: `
       <TestComponent 
-        @click="onClick"
         v-bind="args"
       >SLOTS DUMMY</TestComponent>`,
-    methods: {
-      onClick: () => {
-        ++emitCounter;
-      },
-    },
+    methods: {},
   };
 };
 
 export const Basic = Template.bind({});
 Basic.args = {
-  url: "https://google.com",
+  product: new Product({ id: "1", name: "dummy", price: 1000 }),
 };
 Basic.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const cmp = await canvas.getByText("SLOTS DUMMY");
+  const cmp = await canvas.getByRole("listitem");
   await expect(cmp).toBeInTheDocument();
-
-  // TEST: カウントアップされて 1 になるはず
-  await fireEvent.click(cmp);
-  await expect(emitCounter).toBe(1);
 };
