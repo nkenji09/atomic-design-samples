@@ -20,7 +20,24 @@ const onClick = () => {
 </script>
 
 <template>
-  <button @click="onClick" :disabled="props.disabled" role="button">
+  <button
+    class="conversion-button"
+    @click="onClick"
+    :disabled="props.disabled"
+    role="button"
+  >
     <slot>CLICK ME</slot>
   </button>
 </template>
+
+<style scoped>
+.conversion-button {
+  width: 100%;
+  height: 3rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #53bf49;
+  color: #005c1a;
+  font-size: 1rem;
+}
+</style>

@@ -4,6 +4,7 @@ import { Product } from "@/values/product";
 import ListImage from "@/components/atoms/images/list-image/list-image.vue";
 import AddCart from "@organisms/cart/add-cart/add-cart.vue";
 import OnProductListAddCartLogic from "@organisms/cart/add-cart/logics/on-product-list";
+import BaseText from "@/components/atoms/texts/base-text/base-text.vue";
 
 /* ■ Props ■ */
 type Props = {
@@ -16,14 +17,34 @@ const props = withDefaults(defineProps<Props>(), {});
 </script>
 
 <template>
-  <article role="listitem">
-    <ListImage :path="props.product.image" />
+  <div class="product-item" role="listitem">
+    <ListImage class="product-image" :path="props.product.image" />
     <div class="product-info">
-      <p>{{ props.product.name }}</p>
+      <p class="product-name">
+        <BaseText>{{ props.product.name }}</BaseText>
+      </p>
       <AddCart
         :product="props.product"
         :logic="new OnProductListAddCartLogic()"
       />
     </div>
-  </article>
+  </div>
 </template>
+
+<style scoped>
+.product-item {
+  position: relative;
+}
+
+.product-image {
+  height: 200px;
+}
+
+.product-name {
+  text-align: center;
+}
+
+.product-info {
+  position: relative;
+}
+</style>

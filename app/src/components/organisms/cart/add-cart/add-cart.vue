@@ -21,10 +21,19 @@ const onClick = () => {
 </script>
 
 <template>
-  <section>
-    <NumberInput v-model="addCount"></NumberInput>
+  <section class="add-cart">
+    <div class="quantity">
+      <NumberInput v-model="addCount"></NumberInput>
+    </div>
     <ConversionButton @click="onClick" :disabled="disabled"
       >カートに入れる</ConversionButton
     >
   </section>
 </template>
+
+<style scoped>
+.quantity {
+  text-align: right;
+  margin-bottom: 0.5rem;
+}
+</style>

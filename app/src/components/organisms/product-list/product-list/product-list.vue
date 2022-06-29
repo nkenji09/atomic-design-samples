@@ -15,8 +15,8 @@ props.logic.loadProducts();
 </script>
 
 <template>
-  <div role="itemlist">
-    <ul v-if="products.length > 0">
+  <div class="product-list" role="itemlist">
+    <ul v-if="products.length > 0" class="item-list">
       <li v-for="product in products" :key="product.id">
         <ProductListItem :product="product"></ProductListItem>
       </li>
@@ -24,3 +24,18 @@ props.logic.loadProducts();
     <p v-else>loading...</p>
   </div>
 </template>
+
+<style scoped>
+.product-list {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.item-list {
+  width: 80%;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+</style>

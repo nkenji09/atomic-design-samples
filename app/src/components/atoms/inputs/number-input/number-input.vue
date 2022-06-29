@@ -33,10 +33,17 @@ const value = computed({
 <template>
   <input
     v-model="value"
-    role="number"
+    class="number-input"
     type="number"
     :min="props.min"
     :max="props.max"
     :placeholder="props.placeholder"
   />
 </template>
+
+<style scoped>
+.number-input {
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+}
+</style>
